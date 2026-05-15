@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://main2d001"]
+
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_player"]
+[ext_resource type="Script" path="res://scripts/circle_drawer.gd" id="2_drawer"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_1"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1"]
+radius = 30.0
+
+[node name="Main" type="Node2D"]
+
+[node name="FloorVisual" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(0, 630, 1152, 630, 1152, 648, 0, 648)
+color = Color(0.25, 0.25, 0.25, 1)
+
+[node name="Floor" type="StaticBody2D" parent="."]
+position = Vector2(0, 630)
+
+[node name="FloorCollision" type="CollisionShape2D" parent="Floor"]
+shape = SubResource("WorldBoundaryShape2D_1")
+
+[node name="Player" type="CharacterBody2D" parent="."]
+position = Vector2(576, 300)
+script = ExtResource("1_player")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+shape = SubResource("CircleShape2D_1")
+
+[node name="Visual" type="Node2D" parent="Player"]
+script = ExtResource("2_drawer")
